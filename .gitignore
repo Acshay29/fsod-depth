@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.pth
+*.zip
+checkpoints/
+data/
+datasets/
+depth_cache/
+logs/
+runs/
+.DS_Store

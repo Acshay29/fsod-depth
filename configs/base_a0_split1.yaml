@@ -1,0 +1,33 @@
+# A0: RGB-only baseline, base training on VOC split 1 (15 base classes)
+experiment: a0_base_split1
+phase: base
+seed: 0
+split: 1
+device: auto
+paths:
+  voc_root: data/VOCdevkit
+  cache: data/cache
+  output_dir: checkpoints
+data:
+  use_depth: false
+  depth_dir: depth_cache
+  flip_prob: 0.5
+  num_workers: 2
+  subset: 0
+model:
+  pretrained_backbone: true
+  trainable_layers: 3
+  min_size: [480, 512, 544, 576, 608, 640]   # random scale in training; LAST value is the test size
+  max_size: 1000
+train:
+  ims_per_batch: 8
+  lr: 0.01              # 0.02 x (8/16): linear scaling from the TFA batch-16 recipe
+  momentum: 0.9
+  weight_decay: 0.0001  # write decimals, not 1e-4 (YAML reads 1e-4 as text)
+  max_iter: 20000       # PLACEHOLDER: we will size this after measuring speed on Colab
+  warmup_iters: 500
+  steps: [14000, 18000]
+  gamma: 0.1
+  amp: true
+  ckpt_every: 1000
+  log_every: 20

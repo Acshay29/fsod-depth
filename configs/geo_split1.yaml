@@ -1,0 +1,30 @@
+# Geometry stage: train only the depth-geometry modules + the base box predictor on base-class data,
+# starting from the A0 base checkpoint. 'mode' is set on the command line (--mode depth|shuffle|const|gray|off).
+experiment: geo_split1
+phase: geo
+split: 1
+device: auto
+paths:
+  voc_root: data/VOCdevkit
+  cache: data/cache
+  fewshot_dir: data/fewshot
+data:
+  flip_prob: 0.5
+  num_workers: 4
+  depth_dir: depth_cache
+geo:
+  mode: depth
+  emb: 64
+  film_scale: 0.5
+train:
+  ims_per_batch: 8
+  iters: 3000            # fixed in advance; the same for every mode (depth and all controls)
+  warmup: 100
+  geo_lr: 0.0003
+  lr: 0.002              # first guess, not tuned on the test set; same for every mode
+  momentum: 0.9
+  weight_decay: 0.0001
+  amp: true
+  grad_clip: 5.0
+  log_every: 50
+  ckpt_every: 500

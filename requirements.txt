@@ -1,0 +1,11 @@
+numpy>=1.26
+pillow>=10.0
+pyyaml>=6.0
+tqdm
+pandas
+scipy
+matplotlib
+tensorboard
+pycocotools>=2.0.7
+opencv-python-headless>=4.9
+transformers>=4.45

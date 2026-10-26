@@ -1,0 +1,24 @@
+# DGA few-shot fine-tuning (same protocol as A0). Variant (depth | shuffle | const | gray | off) comes from the geo checkpoint.
+experiment: dga_fs_split1
+phase: finetune
+split: 1
+device: auto
+paths:
+  voc_root: data/VOCdevkit
+  cache: data/cache
+  fewshot_dir: data/fewshot
+data:
+  flip_prob: 0.5
+  num_workers: 4
+  depth_dir: depth_cache
+model:
+  cos_scale: 20.0
+train:
+  ims_per_batch: 8
+  lr: 0.001
+  momentum: 0.9
+  weight_decay: 0.0001
+  amp: true
+  iters_by_shot: {1: 600, 2: 800, 3: 1000, 5: 1500, 10: 2500}   # fixed in advance, NOT tuned on the test set
+  step_frac: 0.75
+  gamma: 0.1
