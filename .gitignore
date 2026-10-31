@@ -1,12 +1,13 @@
 .venv/
 __pycache__/
-*.pyc
 *.pth
 *.zip
 checkpoints/
+ckpt/
 data/
 datasets/
 depth_cache/
 logs/
 runs/
+demo_out/
 .DS_Store
